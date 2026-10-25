@@ -41,12 +41,13 @@ css += """
 .landing-page .occasion img{width:100%;height:170px;object-fit:cover;display:block}
 .landing-page .occasion div{padding:18px 20px}.landing-page .occasion h3{font-size:18px;margin:0 0 6px}.landing-page .occasion p{font-size:14px;color:var(--muted);margin:0}
 .landing-page .also{margin-top:22px;color:var(--muted);font-size:15px}
-.landing-page .backdrops{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:32px}
+.landing-page .backdrops{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
 .landing-page .backdrops figure{margin:0}.landing-page .backdrops img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;border:1px solid #e4dccf}
 .landing-page .backdrops figcaption{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
+.landing-page .more-backdrops{margin-top:18px}.landing-page .more-backdrops summary{cursor:pointer;font-weight:700;color:#806333;font-size:15px;padding:8px 0;list-style:none}.landing-page .more-backdrops summary::-webkit-details-marker{display:none}.landing-page .more-backdrops summary:after{content:" ↓"}.landing-page .more-backdrops[open] summary:after{content:" ↑"}.landing-page .more-backdrops .backdrops{margin-top:14px}
 .landing-page .included{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
 @media(max-width:960px){.landing-page .grid.three{grid-template-columns:1fr;gap:30px}.landing-page .how{grid-template-columns:1fr;gap:36px}.landing-page .occasions,.landing-page .included{grid-template-columns:1fr 1fr}.landing-page .backdrops{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:560px){.landing-page .occasions,.landing-page .included{grid-template-columns:1fr}.landing-page .backdrops{grid-template-columns:repeat(3,1fr);gap:10px}}
+@media(max-width:560px){.landing-page .occasions,.landing-page .included{grid-template-columns:1fr}.landing-page .backdrops{grid-template-columns:repeat(2,1fr);gap:10px}}
 """
 
 TITLE = "Photo Booth Rental for Parties & Events | The Sounds"
@@ -69,7 +70,7 @@ INCLUDES = ["Instant sharing by text, email and AirDrop", "Every image after the
 
 HOW = [("Step in and strike a pose", "Tap the screen, grab a prop or a friend, and smile. It’s simple enough that nobody needs instructions."),
        ("Photos land on their phone", "Guests send their photos to themselves by text, email or AirDrop before they’ve even left the booth."),
-       ("You get every single image", "After the event I send you the full collection, so you have every photo your guests took.")]
+       ("You get every single image", "After the event you receive the full collection, so you have every photo your guests took.")]
 
 OCCASIONS = [("holiday-party.jpg", "Christmas & holiday parties", "Office parties, family gatherings and holiday galas."),
              ("confetti-party.jpg", "Theme parties", "Branded to your theme, whether that’s the ’80s, Hollywood or a winter wonderland."),
@@ -77,7 +78,7 @@ OCCASIONS = [("holiday-party.jpg", "Christmas & holiday parties", "Office partie
              ("evening-party.jpg", "Birthdays & milestones", "40ths, 50ths, retirements, anniversaries and everything in between.")]
 ALSO = "Also great for corporate events, school dances and proms, grad parties, stag and does, fundraisers and weddings."
 
-EXTRAS = [("Branded to your event", "Your name, date, logo or theme on every photo. I design it to match your colours."),
+EXTRAS = [("Branded to your event", "Your name, date, logo or theme on every photo, designed to match your colours."),
           ("Easy for every age", "Kids, teens and grandparents all figure it out in seconds."),
           ("Fully digital by default", "No waiting around for prints. Photos are shared the moment they’re taken."),
           ("Prints when you want them", "Add unlimited on-site prints and a dedicated attendant for $200.")]
@@ -85,17 +86,17 @@ EXTRAS = [("Branded to your event", "Your name, date, logo or theme on every pho
 BACKDROPS = ["Glitter Gold", "Glitter Silver", "Glitter Rose Gold", "Silver Snowflake", "White Art Deco", "Paper Flowers",
              "Floral", "Greenery", "Rustic Wood", "Metal Tread", "Marble White", "Marble Black"]
 
-FAQS = [("Do I need to book a DJ to get the photo booth?", "No. The photo booth is its own booking. If you’d like music too, I’m a DJ and host as well, and I’m happy to quote both together."),
+FAQS = [("Do I need to book a DJ to get the photo booth?", "No. The photo booth is its own booking. If you’d like music too, The Sounds also offers DJ services, and both can be quoted together."),
         ("How do guests get their photos?", "Right at the booth. Guests send their photos to their own phone by text, email or AirDrop, so they can share them that night."),
         ("Do we get all the photos afterwards?", "Yes. After the event you receive every image taken at the booth."),
         ("Can the photos match our theme?", "Yes. Every booth includes custom branding, so the photos carry your name, date, logo or theme in your colours."),
         ("Can we get printed photos?", "Yes. Add unlimited on-site prints and a dedicated attendant for $200. Otherwise the booth is fully digital."),
         ("Which package should we pick?", "Most parties choose 3 hours. If guests are arriving over a long evening, or it’s a gala or holiday party, up to 5 hours means nobody misses it."),
-        ("How do we book?", "Send your date, the occasion and how long you’d like the booth through the form below. I’ll confirm availability and send an agreement. A 50% booking fee reserves your date.")]
+        ("How do we book?", "Send your date, the occasion and how long you’d like the booth through the form below. You’ll get a confirmation of availability and an agreement to sign online. A 50% booking fee reserves your date.")]
 
-STEPS = [("Tell me about the party", "Your date, the occasion, and how long you’d like the booth."),
-         ("I’ll check my calendar", "I’ll get back to you personally, usually the same day."),
-         ("Make it yours", "We’ll pick a backdrop and design the branding for your photos.")]
+STEPS = [("Share the details", "Your date, the occasion, and how long you’d like the booth."),
+         ("Get a quick reply", "You’ll hear back with availability and pricing for your date."),
+         ("Make it yours", "Choose a backdrop and approve the branding for your photos.")]
 
 
 def money(n):
@@ -129,8 +130,9 @@ def page():
     occ = "".join(f'<article class="occasion"><img src="assets/{img}" alt="{e(h)}" loading="lazy"><div><h3>{e(h)}</h3><p>{e(t)}</p></div></article>'
                   for img, h, t in OCCASIONS)
     extras = "".join(f'<article class="extra"><h3>{e(h)}</h3><p>{e(t)}</p></article>' for h, t in EXTRAS)
-    bd = "".join(f'<figure><img src="assets/backdrops/{n.lower().replace(" ", "-")}.jpg" alt="{e(n)} photo booth backdrop" loading="lazy"><figcaption>{e(n)}</figcaption></figure>'
-                 for n in BACKDROPS)
+    fig = lambda n: (f'<figure><img src="assets/backdrops/{n.lower().replace(" ", "-")}.jpg" alt="{e(n)} photo booth backdrop" loading="lazy"><figcaption>{e(n)}</figcaption></figure>')
+    bd = "".join(fig(n) for n in BACKDROPS[:4])
+    bd_more = "".join(fig(n) for n in BACKDROPS[4:])
     faqs = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in FAQS)
     steps = "".join(f'<div class="inquiry-step"><span>{i+1:02d}</span><div><h3>{e(h)}</h3><p>{e(t)}</p></div></div>' for i, (h, t) in enumerate(STEPS))
 
@@ -156,10 +158,9 @@ def page():
 <section class="section cream" id="pricing" aria-labelledby="packages-title"><div class="wrap"><div class="center"><div class="eyebrow">Simple, all-digital pricing</div><h2 id="packages-title">Pick your time.<br>That’s it.</h2><p class="muted">Every package includes the same booth, the same instant sharing, and every image after the event.</p></div><div class="grid three">{pk}</div><p class="note">Want printed photos? Add unlimited on-site prints and a dedicated attendant for $200. A 50% booking fee reserves your date.</p></div></section>
 <section class="section paper"><div class="wrap"><div class="eyebrow">Made for any party</div><h2>Whatever you’re celebrating,<br>there’s a line for the booth.</h2><div class="occasions">{occ}</div><p class="also">{e(ALSO)}</p></div></section>
 <section class="section"><div class="wrap"><div class="eyebrow">Every booth includes</div><h2>The little things<br>that make it work.</h2><div class="extras">{extras}</div></div></section>
-<section class="section cream"><div class="wrap"><div class="eyebrow">Backdrops</div><h2>Set the scene.</h2><p class="muted">Pick the backdrop that suits your party, from glitter and snowflakes to greenery and marble.</p><div class="backdrops">{bd}</div></div></section>
-<section class="section meet-joe paper"><div class="wrap joe-grid"><div><img class="joe-image" src="assets/joe.jpeg" alt="Joe Seyler speaking into a microphone at an event" loading="lazy"><p class="photo-caption">Joe Seyler · The Sounds DJ Services &amp; Entertainment</p></div><div class="joe-copy"><div class="eyebrow">Who you’re booking</div><h2>A real person,<br>not a rental counter.</h2><p>I’m Joe. I’ve spent over 30 years at parties, so I know the moments people want to keep. When you book the booth, you deal with me from your first message to the last photo.</p><p>Need music too? I’m also a DJ and host. Ask about pairing the booth with a DJ package.</p><a class="button" href="#check">Check My Date</a></div></div></section>
+<section class="section cream"><div class="wrap"><div class="eyebrow">Sample backdrops</div><h2>Set the scene.</h2><p class="muted">A few of the styles available, from glitter and snowflakes to greenery and marble. Ask about matching your theme.</p><div class="backdrops">{bd}</div><details class="more-backdrops"><summary>See {len(BACKDROPS) - 4} more samples</summary><div class="backdrops">{bd_more}</div></details></div></section>
 <section class="section"><div class="wrap"><div class="center"><div class="eyebrow">A few helpful details</div><h2>Before you<br>get in touch.</h2></div><div class="faq">{faqs}</div></div></section>
-<section class="section inquiry-section cream" id="check" aria-labelledby="inquiry-title"><div class="wrap inquiry-grid"><div><div class="eyebrow">Check my date</div><h2 id="inquiry-title">Let’s get your<br>booth booked.</h2><p class="muted">Tell me your date, the occasion, and how long you’d like the booth. I’ll get back to you personally.</p>{steps}</div><div class="form-shell"><h3>Check My Date</h3>
+<section class="section inquiry-section cream" id="check" aria-labelledby="inquiry-title"><div class="wrap inquiry-grid"><div><div class="eyebrow">Check my date</div><h2 id="inquiry-title">Let’s get your<br>booth booked.</h2><p class="muted">Share your date, the occasion, and how long you’d like the booth. You’ll hear back soon.</p>{steps}</div><div class="form-shell"><h3>Check My Date</h3>
 <iframe src="https://api.profitflo.io/widget/form/{FORM_ID}" style="width:100%;height:1300px;border:none;border-radius:8px;display:block" id="inline-{FORM_ID}" data-layout="{{'id':'INLINE'}}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="{FORM_NAME}" data-height="1300" data-layout-iframe-id="inline-{FORM_ID}" data-form-id="{FORM_ID}" data-cookie-consent="true" data-cookie-consent-provider="auto" title="{FORM_NAME}"></iframe>
 <script src="https://api.profitflo.io/js/form_embed.js"></script>
 <p class="form-fallback" style="font-size:14px;margin-top:16px">Form not displaying? <a href="{FALLBACK}" style="text-decoration:underline">Open the contact page</a>.</p></div></div></section>
