@@ -31,7 +31,12 @@ css += """
 .landing-page .package.featured{border:2px solid var(--gold);box-shadow:0 18px 40px rgba(60,45,20,.12)}
 .landing-page .badge{position:absolute;top:-13px;left:30px;background:var(--gold);color:#171713;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:999px}
 .landing-page .how{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center}
-.landing-page .how img{width:100%;border-radius:12px;display:block}
+.landing-page .how-media{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+.landing-page .how-media video,.landing-page .how-media img{width:100%;border-radius:12px;display:block;object-fit:cover}
+.landing-page .how-media video{aspect-ratio:9/16}.landing-page .how-media img{aspect-ratio:4/5}
+.landing-page video.hero-image{pointer-events:none}
+@media(max-width:760px){.landing-page video.hero-image{display:none}.landing-page .hero{background:#171715 url(assets/hero-booth-mobile.jpg) 50% 30%/cover}}
+@media(prefers-reduced-motion:reduce){.landing-page video.hero-image{display:none}.landing-page .hero{background:#171715 url(assets/hero-booth.jpg) center/cover}}
 .landing-page .how-steps{margin-top:28px;display:grid;gap:22px}
 .landing-page .how-step{display:flex;gap:18px;align-items:baseline}
 .landing-page .how-step span{font-size:13px;color:#806333;font-weight:800;min-width:24px}
@@ -53,7 +58,7 @@ css += """
 TITLE = "Photo Booth Rental for Parties & Events | The Sounds"
 DESCRIPTION = ("Digital selfie booth rental across Southern Ontario for Christmas parties, birthdays, Sweet 16s, "
                "theme parties and corporate events. From $400 for 2 hours. Photos sent instantly by text, email or AirDrop.")
-HERO_ALT = "Friends laughing and celebrating under balloons at a party"
+HERO_ALT = "Two guests laughing as they tap the screen of the selfie booth"
 
 PACKAGES = [
     dict(slug="two-hours", name="2 Hours", tag="The digital selfie booth", price=400,
@@ -72,10 +77,10 @@ HOW = [("Step in and strike a pose", "Tap the screen, grab a prop or a friend, a
        ("Photos land on their phone", "Guests send their photos to themselves by text, email or AirDrop before they’ve even left the booth."),
        ("You get every single image", "After the event you receive the full collection, so you have every photo your guests took.")]
 
-OCCASIONS = [("holiday-party.jpg", "Christmas & holiday parties", "Office parties, family gatherings and holiday galas."),
-             ("confetti-party.jpg", "Theme parties", "Branded to your theme, whether that’s the ’80s, Hollywood or a winter wonderland."),
+OCCASIONS = [("new-year.jpg", "Christmas & New Year’s parties", "Office parties, family gatherings, holiday galas and the countdown to midnight."),
+             ("glitter-party.jpg", "Theme parties", "Branded to your theme, whether that’s the ’80s, Hollywood or a winter wonderland."),
              ("sweet-16.jpg", "Sweet 16s & Quinceañeras", "Their friends will be in that booth all night."),
-             ("evening-party.jpg", "Birthdays & milestones", "40ths, 50ths, retirements, anniversaries and everything in between.")]
+             ("disco-ball.jpg", "Birthdays & milestones", "40ths, 50ths, retirements, anniversaries and everything in between.")]
 ALSO = "Also great for corporate events, school dances and proms, grad parties, stag and does, fundraisers and weddings."
 
 EXTRAS = [("Branded to your event", "Your name, date, logo or theme on every photo, designed to match your colours."),
@@ -145,16 +150,16 @@ def page():
 <meta property="og:type" content="website"><meta property="og:locale" content="en_CA">
 <meta property="og:site_name" content="The Sounds DJ Services &amp; Entertainment">
 <meta property="og:title" content="{e(TITLE)}"><meta property="og:description" content="{e(DESCRIPTION)}">
-<meta property="og:url" content="{BASE}"><meta property="og:image" content="{BASE}assets/hero-party.jpg"><meta property="og:image:alt" content="{e(HERO_ALT)}">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(TITLE)}"><meta name="twitter:description" content="{e(DESCRIPTION)}"><meta name="twitter:image" content="{BASE}assets/hero-party.jpg">
+<meta property="og:url" content="{BASE}"><meta property="og:image" content="{BASE}assets/hero-booth.jpg"><meta property="og:image:alt" content="{e(HERO_ALT)}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(TITLE)}"><meta name="twitter:description" content="{e(DESCRIPTION)}"><meta name="twitter:image" content="{BASE}assets/hero-booth.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>body{{margin:0}}{css}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head><body>
 <div class="landing-page"><header class="nav"><div class="wrap nav-inner"><img class="brand-logo" src="assets/logo-white.png" alt="The Sounds DJ Services &amp; Entertainment"><a class="button" href="#check">Check My Date</a></div></header><main>
-<section class="hero"><img class="hero-image" src="assets/hero-party.jpg" alt="{e(HERO_ALT)}" fetchpriority="high"><div class="wrap"><div class="eyebrow">Photo booth rental · Southern Ontario</div><h1>Every great party<br>deserves great memories.</h1><p>A digital selfie booth your guests will actually use. Step in, strike a pose, and the photos land on their phones before the night’s even over.</p><div class="hero-buttons"><a class="button" href="#check">Check My Date <span aria-hidden="true">↗</span></a><a class="button button-outline" href="#pricing">See the Prices <span aria-hidden="true">↓</span></a></div><div class="hero-foot"><span>From $400</span><span>Photos by text, email &amp; AirDrop</span><span>Branded to your theme</span></div></div></section>
-<section class="section"><div class="wrap how"><img src="assets/booth.jpg" alt="The Sounds digital selfie booth in front of a pink wall with a balloon arch" loading="lazy"><div><div class="eyebrow">How it works</div><h2>Easy to use.<br>Instant to share.</h2>{how}</div></div></section>
+<section class="hero"><video class="hero-image" autoplay muted loop playsinline preload="auto" poster="assets/video/confetti-poster.jpg" aria-hidden="true"><source src="assets/video/confetti.mp4" type="video/mp4" media="(min-width: 761px)"></video><div class="wrap"><div class="eyebrow">Photo booth rental · Southern Ontario</div><h1>Every great party<br>deserves great memories.</h1><p>A digital selfie booth your guests will actually use. Step in, strike a pose, and the photos land on their phones before the night’s even over.</p><div class="hero-buttons"><a class="button" href="#check">Check My Date <span aria-hidden="true">↗</span></a><a class="button button-outline" href="#pricing">See the Prices <span aria-hidden="true">↓</span></a></div><div class="hero-foot"><span>From $400</span><span>Photos by text, email &amp; AirDrop</span><span>Branded to your theme</span></div></div></section>
+<section class="section"><div class="wrap how"><div class="how-media"><video autoplay muted loop playsinline preload="metadata" poster="assets/video/group-props-poster.jpg" aria-label="Four friends posing with signs at the selfie booth"><source src="assets/video/group-props.mp4" type="video/mp4"></video><img src="assets/share-phone.jpg" alt="A guest saving her booth photo to her phone" loading="lazy"></div><div><div class="eyebrow">How it works</div><h2>Easy to use.<br>Instant to share.</h2>{how}</div></div></section>
 <section class="section cream" id="pricing" aria-labelledby="packages-title"><div class="wrap"><div class="center"><div class="eyebrow">Simple, all-digital pricing</div><h2 id="packages-title">Pick your time.<br>That’s it.</h2><p class="muted">Every package includes the same booth, the same instant sharing, and every image after the event.</p></div><div class="grid three">{pk}</div><p class="note">Want printed photos? Add unlimited on-site prints and a dedicated attendant for $200. A 50% booking fee reserves your date.</p></div></section>
 <section class="section paper"><div class="wrap"><div class="eyebrow">Made for any party</div><h2>Whatever you’re celebrating,<br>there’s a line for the booth.</h2><div class="occasions">{occ}</div><p class="also">{e(ALSO)}</p></div></section>
 <section class="section"><div class="wrap"><div class="eyebrow">Every booth includes</div><h2>The little things<br>that make it work.</h2><div class="extras">{extras}</div></div></section>
